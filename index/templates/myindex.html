@@ -1,0 +1,97 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <title>数据可视化首页</title>
+   <link rel="stylesheet" href="{% static 'css/myindex.css' %}">
+   <style>
+      .active{/*相当于#focus-text li:hover*/
+          background:#900;
+          color: #fff;
+      }
+   </style>
+   <link rel="stylesheet" href="{% static 'css/shutter.css' %}">
+   <script src="/static/js/jquery-1.11.3.js"></script>
+   <script src="/static/js/myindex.js"></script>
+   <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+   <script src="{% static 'js/velocity.js' %}"></script>
+   <script src="{% static 'js/shutter.js' %}"></script>
+   <script>
+   $(function () {
+     $('.shutter').shutter({
+     shutterW: 1000, // 容器宽度
+     shutterH: 358, // 容器高度
+     isAutoPlay: true, // 是否自动播放
+     playInterval: 2500, // 自动播放时间
+     curDisplay: 3, // 当前显示页
+     fullPage: false // 是否全屏展示
+     });
+   });
+   </script>
+</head>
+<body>
+   <div id="header">
+      <h1  id="dsee">QDSee
+      </h1>
+      <div class="nav">
+         <a href="/">首页</a>
+         <a href="#wc">文本</a>
+         <a href="#excel">EXCEL</a>
+         <a href="#db">数据库</a>
+         <div id="navright">
+           <!-- <a href="/login/" style="margin-right:14px;">登录</a>|
+           <a href="/register/" style="margin-right:35px">注册</a> -->
+         </div>
+         
+      </div class="nav">
+
+   </div>
+
+   <div id="content">
+      <div class="shutter">
+        <div class="shutter-img">
+         <a href="#" data-shutter-title="Iron Man">
+            <img src="{% static 'img/excel_bgimg.jpg' %}" alt="#">
+         </a>
+         <a href="#" data-shutter-title="Super Man">
+            <img src="{% static 'img/floor1_bgimg.gif' %}" alt="#">
+         </a>
+         <a href="#" data-shutter-title="The Hulk">
+            <img src='{% static "img/bg_demo.png" %}' alt="#">
+         </a>
+          <!-- <a href="#" data-shutter-title="The your"><img src="images/a4.png" alt="#"></a> -->
+        </div>
+        <ul class="shutter-btn">
+          <li class="prev"></li>
+          <li class="next"></li>
+        </ul>
+        <!-- <div class="shutter-desc">
+          <p>Iron Man</p>
+        </div> -->
+      </div>
+      <div id="shutter_bottom">
+         <div id="wc" class="labeltxt"><p>QDSee词云</p></div>
+         <div id="floor_cloud">    
+            <div><a href="/wordcloud/">立即生成</a></div>
+         </div>
+
+         <div id='excel' class="labeltxt">
+            <p>excel数据分析</p></div>
+         <div id="floor_excel">        
+            <div><a href="#">立即使用</a></div>
+         </div>
+
+         <div id='db' class="labeltxt">
+            <p>数据库数据分析</p></div>
+         <div id="floor_db">
+            <div><a href="#">立即体验</a></div>
+         </div>
+      </div>
+   </div>
+
+   <footer style="background: #b0c4de;text-align: center;padding: 5px;margin-top: 40px;">
+   @ copyright
+   </footer>
+</body>
+</html>

@@ -1,0 +1,116 @@
+body{
+   margin:0px;
+   padding:0px;
+}
+#header{
+   background:#f0f8ff;
+   width:100%;
+   height:85px;
+   margin:0px auto;
+   border-bottom: 1px solid #ccc;
+}
+.logo>h1,p{/*使h1、p元素按照行级元素显示*/
+   display:inline;            
+}
+#dsee{
+   color:#00008b;
+   font-size:45px;
+   margin-left:25px;
+   line-height:85px;
+}
+#dsee span{
+   font-size:25px;
+   font-family:"文泉驿正黑";
+   color:#aaa;
+   float:right;
+   margin-right:25px;
+}
+#content{
+   width:100%;
+   height:560px;
+   background-image:url('bg_demo.png');
+   position:relative;
+   margin:10px auto;
+}
+#loginframe{
+   width:273px;
+   height:297px;
+   background:rgba(0,0,0,0.3);
+   position:absolute;
+   top:131px;
+   right:131px;
+}
+form{
+   width:254px;
+   /*height:277px;*/
+   color:#fff;
+   margin:0px auto;
+}
+form h2{
+   width:234px;
+   height:40px;
+   border-bottom:1px solid #fff;
+   font-size:18px;
+   font-family:"黑体";
+   font-weight:lighter;
+   margin:4px 6px;
+   padding-left:8px;
+   line-height:40px;
+}
+h2 span{
+   float:right;
+   margin-right:8px;
+}
+form span  a{
+   font-size:12px;
+   color:#fff;
+   text-decoration:none;
+}
+.field{
+   margin: 6px 0px;
+   position:relative;
+}
+.field input{
+   width:238px;
+   height:37px;
+   font-size: 20px;
+   margin-top:10px;
+   margin-left:6px;
+   border-radius:4px;
+   border: none;
+}
+form .field img{
+   position:absolute;
+   top:18px;
+   right:14px;
+}
+form .field span{
+   height: 10px;
+   font-size:10px;
+   padding-left:8px;
+   color: transparent;
+   /*visibility: hidden;*/
+}
+.error{
+   color:red;
+}
+.autolg{
+   margin-left:6px;
+}
+.autolg span{
+   float:right;
+   margin-right:8px;
+}
+.loginbt{
+   width:241px;
+   height:43px;
+   font-size:18px;
+   font-weight:bold;
+   margin-top:5px;
+   margin-bottom:5px;
+   margin-left:8px;
+   color:white;
+   background:-webkit-linear-gradient(top, #27b0f6 0%, #0aa1ed 100%);
+   border:none;
+   border-radius:4px;
+}

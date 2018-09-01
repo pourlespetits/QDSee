@@ -1,0 +1,114 @@
+*{/*body{margin:0px}对<hn>无效*/
+   margin:0px;
+   padding:0px;
+}
+#header{
+   background:#f0f8ff;
+   width:100%;
+   height:85px;
+   margin:0px auto;
+   border-bottom: 1px solid #ccc;
+   /*position: fixed;
+   top: 0px;
+   left: 0px;*/
+}
+.logo>h1,p{/*使h1、p元素按照行级元素显示*/
+   display:inline;            
+}
+#dsee{
+   color:#00008b;
+   font-size:45px;
+   margin-left:25px;
+   line-height:85px;
+}
+#dsee span{
+   font-size:25px;
+   font-family:"文泉驿正黑";
+   color:#aaa;
+   float:right;
+   margin-right:25px;
+}
+#content{
+   width:100%;
+   height:800px;
+   /*background:#f5f5f5;*/
+   margin:0px auto;
+}
+#unumber{
+   margin-left: 143px;
+}
+
+#uname{
+   margin-right: 1
+}
+#loginframe{
+   width:800px;
+   height:482px;
+   border:3px  solid #F0F8FF;
+   border-radius:5px;
+   border-top:5px  solid #00BFFF;
+   margin:50px auto;
+}
+form{
+   width:600px;
+   padding-top:30px;
+   /*border:2px solid red;*/
+   margin:0px auto;
+   overflow:hidden;
+}
+form>div{margin:30px 160px; }
+label{
+   /*width: 250px*/;
+   display: inline-block;
+   font-size: 17px;
+   color: #738299;
+   padding-right: 16px;
+   margin-bottom: 10px;
+}
+#confirm label{
+   margin-left:-35px;
+}
+form input{
+   width:200px;
+   height:24px;
+   border:none;
+   border-bottom:1px solid #738299;
+   font-size:18px;
+   padding:8px 10px;
+   border-radius:3px;
+   outline: none;
+
+}
+
+
+#protocol{
+   width:320px;
+   height:18px;
+   font-size:14px;
+   margin-bottom:0px;
+}
+#Button>input{
+   width:280px;
+   height:60px;
+   background:#27b0f6;
+   color: white;
+   font-size: 25px;
+   font-family: "微软雅黑";
+   border-radius:5px;
+   border:none;
+}
+#gologin{
+   margin:0px 310px;
+}
+#proto{
+   width:22px;
+}
+span a{
+   text-decoration:none;
+   color:#27b0f6;
+}
+footer{
+   background: #b0c4de;
+   text-align: center;
+   padding: 5px;
+}

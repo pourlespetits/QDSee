@@ -1,0 +1,63 @@
+body,p,a,ul,ol,h1,h2,h3,h4,h5{
+    margin: 0px;
+    padding: 0px;
+    font-family: "微软雅黑";
+    list-style: none;
+}
+a{
+    text-decoration: none;
+    color: #3497DB;
+}
+a:hover{
+    color: #66D9EF;
+    text-decoration: none;
+}
+body{
+    margin: 0px;
+    padding: 0px;
+}
+#header{
+    width:100%;
+    height: 85px;
+    background:#f0f8ff;
+    border-bottom: 1px solid #ccc;
+}
+#header h1,#header p{/*使h1、p元素按照行级元素显示*/
+    display:inline;
+    margin: 0px 25px;            
+}
+#dsee{
+    color:#00008b;
+    font-size:45px;
+    font-family: "微软雅黑";
+    margin-left:25px;
+    line-height:80px;
+    font-weight: bold;
+    float: left;
+}
+
+.nav{
+    width: 100%;
+    /*padding-left: 100px;*/
+    text-align: center;
+    line-height:80px;
+}
+#header a{
+    text-decoration: none;  
+    font-size: 18px;
+    color: #6C7B8B;
+    margin: 0px 35px;
+}
+#header a:hover{
+    color: #303030;
+}
+#navright{float: right;color: #6C7B8B}
+#navright>a{
+    margin:0px;
+}
+footer{
+    background: #b0c4de;
+    text-align: center;
+    padding: 5px;
+    margin-top: 40px;
+}

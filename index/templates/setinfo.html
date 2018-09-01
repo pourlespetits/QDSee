@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/contright.css">
+    <!-- <link rel="stylesheet" href="/static/css/info.css"> -->
+    <!-- <link rel="stylesheet" href="/static/css/bootstrap.min.css"> -->
+    <script src="/static/js/jquery-1.11.3.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/setinfo.js"></script>
+    <!-- <script src="../static/js/bootstrap.min.js"></script> -->
+</head>
+<body>
+    <!-- <div id="content"> -->
+        <!-- <img src="/static/img/touxiang.jpg" alt=""> -->
+    <div id="contright-header">
+        <img src="/static/img/touxiang.jpg" alt="">
+        <span>修改个人资料</span>
+    </div>
+    <form class="form-horizontal" role="form">
+
+        <div id="phonediv" class="formdiv">
+            <label for="uphone">手机号:</label>
+            <div class="div-horizal">
+                <input type="text" maxlength="11" name="uphone" value="{{uphone}}">
+            </div>
+        </div>
+        <div id="namediv" class="formdiv">
+            <label for="uname">姓&nbsp;名:</label>
+            <div class="div-horizal">
+                <input type="text" name="uname" value="{{uname}}">
+            </div>
+        </div>
+        <div id="sexdiv" class="formdiv">
+            <label>性&nbsp;别:</label>
+            <div class="div-horizal">
+                <label for="sex">
+                    <input type="radio" name="sex" value="1" checked>男&nbsp;&nbsp;
+                    <input type="radio" name="sex" value="0">女
+                </label>
+            </div>
+        </div>
+        <div id="emaildiv" class="formdiv">
+            <label for="uemail">邮&nbsp;箱:</label>
+            <div class="div-horizal">
+                <input type="email" name="uemail" value="{{uemail}}">
+            </div>
+        </div>
+        <div id="birthdiv" class="formdiv">
+            <label for="birthday">生&nbsp;日:</label>
+            <div class="div-horizal">
+                <input type="text" name="birthday" value="{{birthday}}">
+            </div>
+        </div>
+        <div id="navplacediv" class="formdiv">
+            <label for="naveplace">籍&nbsp;贯:</label>
+            <div class="div-horizal">
+                <input type="text" name="navplace" value="{{navplace}}">
+            </div>
+        </div>
+        <input id="subtn" type="button" value="保存">
+    </form>
+    <!-- </div> -->
+</body>
+</html>

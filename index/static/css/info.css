@@ -1,0 +1,136 @@
+body,p,a,ul,ol,h1,h2,h3,h4,h5{
+	margin: 0px;
+	padding: 0px;
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	color: #3497DB;
+}
+a:hover{
+	color: #66D9EF;
+	text-decoration: none;
+}
+#nav{
+	height: 95px;
+	background-color: #F0F8FF;
+	border-bottom: 1px solid #CCCCCC;
+	overflow: hidden;
+}
+#navleft{
+	display: inline-block;
+}
+#welcome{
+	color: #666666;
+}
+#navright{
+	float: right;
+	margin-right: 50px;
+	line-height: 95px;
+}
+#navright span{
+	margin: 0px 10px;
+}
+#container{
+	width: 100%;
+	background: #F6F5FA;
+	margin-top: 10px;
+}
+#container #accordion{
+	width: 15%;
+	background: #3497db;
+    height: 100%;
+    font-family: "微软雅黑";
+    font-size: 15px;
+    /*text-align: center;*/
+    z-index: 3;
+    float: left;
+    border-radius: 5px;
+}
+#accordion a{
+	cursor: pointer;
+	display: block;
+	line-height: 50px;
+	text-decoration: none;
+
+}
+/*覆盖bootstrap中的.panel*/
+.panel {
+	margin-bottom: 0px;
+}
+/*.panel-bgd{
+	background-color:#3497db; 
+}*/
+.palbody{
+	background-color: #F5F5F5;
+}
+.panel-body{
+    padding: 3px;
+}
+.palbody a{
+	padding-left: 50px;
+	color: #868686;
+}
+.palbody a:hover{
+	color: #66D9EF;
+	text-decoration: none;
+}
+#contright{
+	width: 83%;
+	height: 700px;
+	margin-left: 12px;
+	float: left;
+	background-color: #F5F5F5;
+}
+#contright-header{
+	border-bottom: 2px solid #DFDFDF;
+    /*padding: 1px 10px;*/
+}
+#contright-header>img{
+	border: 2px solid #fff;
+	border-radius: 50%;
+	margin-left:45px;
+}
+#contright-header>span{
+	font-size: 20px;
+	color:#746C6C;
+}
+form{
+    /*text-align: center;*/
+    margin-left: 80px;
+}
+input[type='text'],input[type='email'],input[type='password']{
+    -web-kit-appearance:none;
+    -moz-appearance: none;
+    border-radius: 5px;
+    border:1px solid #c8cccf;
+    font-size:1.4em;
+    height:45px;
+}
+.div-horizal{
+    display: inline-block;
+    margin-left: 20px;
+}
+.formdiv{
+    margin: 30px auto;
+}
+label{
+    width:76px;
+    font-size: 17px;
+    text-align: right;
+}
+#sexdiv>div>label{
+    width: 100px;
+}
+#subtn{
+    margin-left: 85px;
+    width: 100px;
+    height: 50px;
+    font-weight: bold;
+    box-shadow: none;
+    background-color: #3497DB;
+    color: white;
+    border-radius: 5px;
+    border:none;
+    font-size: 17px;
+}

@@ -1,0 +1,173 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+ul,ol{
+    list-style: none;
+}
+#header{
+    width:100%;
+    height: 85px;
+    background:#f0f8ff;
+    border-bottom: 1px solid #ccc;
+}
+#header h1,p{/*使h1、p元素按照行级元素显示*/
+    display:inline;
+    margin: 0px 25px;            
+}
+#dsee{
+    color:#00008b;
+    font-size:45px;
+    font-family: "微软雅黑";
+    margin-left:25px;
+    line-height:80px;
+    font-weight: bold;
+    float: left;
+}
+
+.nav{
+    width: 100%;
+    /*padding-left: 100px;*/
+    text-align: center;
+    line-height:80px;
+}
+#header a{
+    text-decoration: none;  
+    font-size: 18px;
+    color: #6C7B8B;
+    margin: 0px 35px;
+}
+#header a:hover{
+    color: #303030;
+}
+#navright{float: right;color: #6C7B8B}
+#navright>a{
+    margin:0px;
+}
+#qbtn{
+    text-align: right;
+}
+#content{
+    width:995px;
+    position: relative;
+    margin: -35px auto;
+}
+#content>#floor1{
+    position: relative;
+    width:995px;
+    height:490px;
+    /*background-image: url("img/floor1_bgimg.jpg");
+    background-position: center; 
+    background-repeat: no-repeat;
+    background-size: 995px auto;*/
+    /*margin: 0px auto;*/
+    overflow: hidden;
+}
+#content>#floor1 img{
+    width: 990px;
+
+}
+#focus-text{
+    position: absolute;
+    bottom: 10px;
+    right: 450px;
+}
+#focus-img{
+    padding-left: 0px;
+}
+.active{/*相当于#focus-text li:hover*/
+    background:#900;
+    color: #fff;
+}
+#content>#floor1 #focus-text li{
+    float:left;
+    display: inline-block;
+    padding:3px 5px;
+    background:#fff;
+    margin-right:5px;
+    color:#900;
+    border-radius: 2px;
+    cursor: pointer;
+}
+.labeltxt{
+    margin-top: 60px;
+}
+.labeltxt p{
+    font-size: 35px;
+    font-family: "黑体";
+    font-weight: bolder;
+    /*color: #b9ecfe;*/
+    color: #a8a8a8;    
+    margin-bottom: 5px;
+    position: relative;
+    left: 10px;
+}
+#shutter_bottom a{
+    padding: 10px 76px;
+    /*background:#071c4b;*/
+    background: rgba(7,65,300,0.5);
+    border-radius: 5px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: "微软雅黑";
+    font-size: 22px;
+    color: #fff;
+    text-decoration: none;
+}
+#content a:hover{
+    background:#6495ED;
+}
+#content #floor_cloud div{
+    position: relative;
+}
+#content #floor_cloud>#wordcloud{
+    position: relative;
+    top: 274px;
+    left: 60px;
+}
+#floor_cloud{
+    width:995px;
+    height: 400px;
+    margin-top: 10px;
+    background-image: url("../img/word_cloud.jpg");
+    background-size: 995px auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0px auto;
+}
+#floor_cloud div{
+    position: relative;
+    top: 282px;
+    left: 532px;
+}
+#floor_excel{
+    width:995px;
+    height: 400px;
+    margin-top: 500px;
+    background-image: url("../img/excel_bgimg.jpg");
+    background-size: 995px auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin: 0px auto;
+}
+#floor_excel div{
+    position: relative;
+    top: 282px;
+    left: 532px;
+}
+#floor_db{
+    width:995px;
+    height: 400px;
+    margin-top: 10px;
+    background-image: url("../img/db_bgimg.jpg");
+    background-size: 995px auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 10px;
+    margin: 0px auto;
+}
+#floor_db div{
+    position: relative;
+    top: 282px;
+    left: 532px;
+}

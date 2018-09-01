@@ -1,0 +1,98 @@
+{% load static %}
+<!doctype html>
+<html>
+<head>
+   <meta charset="utf-8">
+   <title>login</title>
+   <link rel="stylesheet" type="text/css" href="{% static 'css/Login.css' %}">
+   <!-- <script src="register.js"></script> -->
+   <script src="{% static 'js/jquery-1.11.3.js' %}"></script>
+   <script>
+      function getData(){
+         var $uname = $('.field>input:first');
+         var $pwd = $('.field>input:not(:first)');
+         var $uerror = $('.field>span:first');
+         var uerror = document.getElementById('uname');
+         var $perror = $('.field>span:not(:first)');
+         // 判断用户名和密码是否为空
+         if ($uname.val().length == 0) {
+            console.log(uerror);
+            $uerror.css({'color':'red'});
+            // uerror.style.display = 'block';
+            return
+         }else if ($pwd.val().length == 0){
+            console.log($perror);
+            $perror.css('color', 'red');
+            return
+         }
+         // 创建异步对象
+         var xhr = getXhr();
+         // 创建请求
+         xhr.open('post', '/login/', true);
+         xhr.onreadystatechange = function(){
+            if (xhr.readyState == 4 && xhr.status == 200) {
+               if (xhr.responseText.length < 10) {
+                  $perror.html(xhr.responseText);
+                  $perror.css('color', 'red')
+               }else{
+                  // console.log('登录成功');
+                  window.location.reload();
+               }
+            }
+         }
+         // 设置请求头
+         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+         var msg = 'uphone=' + $uname.val() + '&upwd=' + $pwd.val() + "&csrfmiddlewaretoken=" + $("[name='csrfmiddlewaretoken']").val();
+         // 发送请求
+         xhr.send(msg);
+
+      }
+
+      function getXhr(){
+         if (window.XMLHttpRequest) {
+            return new XMLHttpRequest()
+          }else{
+            return ActiveXObject("Microsoft.XMLHTTP")
+          }
+      }
+   </script>
+</head>
+<body>
+   <div  id="header" > 
+      <div class="logo">
+         <h1  id="dsee">QDSee
+         <span>数据展示，上QDSee</span>
+         </h1> 
+      </div>
+   </div>
+   <div id="content">
+      <div id="loginframe">
+         <form>
+            {% csrf_token %}
+            <h2>登录 QDSee
+               <span><a href="/register/">新用户注册</a></span>
+            </h2>
+            <div class="field">
+               <input type="text" placeholder="请输入手机号" name="uphone"></input>
+               <img src="http://www.codeboy.com/img/login/yhm.png">
+               <span class="error" id="uname">手机号不能为空</span>
+            </div>
+
+            <div class="field">
+               <input type="password" placeholder="请输入密码" name="upwd"></input>
+               <img src="http://www.codeboy.com/img/login/mm.png">
+               <span class="error" id="pwd">密码不能为空</span>
+            </div>
+
+            <div class="autolg">
+               <input id="autolg" name="autolg" type="checkbox" value="on" checked >
+               自动登录<span><a href="#">忘记密码?</a></span>                 
+            </div>
+         </form>
+            <button class="loginbt" name="id_name" onclick="getData()">登录</button>
+      </div>
+   </div>
+<footer style="background: #b0c4de;text-align: center;padding: 5px;">@ copyright
+</footer>
+</body>
+</html>
