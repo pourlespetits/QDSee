@@ -20,5 +20,8 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('index.urls')),
+    url(r'^index/', include('index.urls')),
+    url(r'^perinfo/', include('perinfo.urls')),
+    url(r'^dbexcel/', include('dbexcel.urls')),
+    url(r'^wclouds/', include('wclouds.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
