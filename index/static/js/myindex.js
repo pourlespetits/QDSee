@@ -4,23 +4,23 @@ $(function(){
 
 // 验证是否已登录
 function check_login(){
-	$.get('/check_login/',function(data){
+	$.get('/index/check_login/',function(data){
 		var html = '';
 		console.log(data.lgStatus);
 		if (data.lgStatus == 1) {
 			// 已登录
-			html = "<a href='/info/' style='margin-right:35px;'>";
+			html = "<a href='/perinfo/' style='margin-right:35px;'>";
 				html+= "<img src='/static/img/tx.jpg' style='border-radius:50%;\
 				margin-top:17px'>";
 			html += "</a>";
 			// 改变立即使用的url
-			$("#floor_excel>div>a").attr('href','/analizy/exc_analizy/?status=1');
+			$("#floor_excel>div>a").attr('href','/dbexcel/excel/?status=1');
 			$("#floor_db>div>a").attr('href','/analizy/db_analizy/?status=1');
 			
 		}else{
-			html = "<a href='/login/' \
+			html = "<a href='/index/login/' \
 			style='margin-right:5px;'>登录</a>";
-			html += "|<a href='/register/' \
+			html += "|<a href='/index/register/' \
 			style='margin-right:35px'>注册</a>";
 			$('#floor_db>div>a').click(function(){
 				alert('请先登录')

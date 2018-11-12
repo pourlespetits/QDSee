@@ -19,7 +19,7 @@
 
       <div id="content">
          <div id="loginframe">
-         <form action='/register/' method="post" onsubmit="return validateForm()">
+         <form action='/index/register/' method="post" onsubmit="return validateForm()">
          {% csrf_token %}
             <div  id="unumber">            
                <label>手机号</label>
@@ -48,7 +48,7 @@
          </form>
          <div  id="gologin">
             <p>已有帐号？
-               <span><a href="/login/">直接登录</a></span>
+               <span><a href="/index/login/">直接登录</a></span>
             </p>
          </div>
       </div>

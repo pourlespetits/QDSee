@@ -11,7 +11,7 @@ function check_phone(){
       var data = 'uphone='+$('#unum').val();
       console.log(data);
       // 发送异步请求
-      $.get('/check_phone/',data,function(resText){
+      $.get('/index/check_phone/',data,function(resText){
          $("#unumber>span").html(resText)
          if (resText.length<=4) {
             $("#unumber>span").css('color', 'green');

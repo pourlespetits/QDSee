@@ -28,7 +28,7 @@
          // 创建异步对象
          var xhr = getXhr();
          // 创建请求
-         xhr.open('post', '/login/', true);
+         xhr.open('post', '/index/login/', true);
          xhr.onreadystatechange = function(){
             if (xhr.readyState == 4 && xhr.status == 200) {
                if (xhr.responseText.length < 10) {
@@ -70,7 +70,7 @@
          <form>
             {% csrf_token %}
             <h2>登录 QDSee
-               <span><a href="/register/">新用户注册</a></span>
+               <span><a href="/index/register/">新用户注册</a></span>
             </h2>
             <div class="field">
                <input type="text" placeholder="请输入手机号" name="uphone"></input>
