@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="/static/css/common.css">
     <link rel="stylesheet" href="/static/css/db_analizy.css">
     <script src='/static/js/jquery-1.11.3.js'></script>
-    <script src='/static/js/db_analizy.js'></script>
-
+    <script src='/static/js/excel.js'></script>
+    <script src='/static/js/xlsx.core.min.js'></script>
 </head>
 <body>
    <div id="header">
@@ -33,8 +33,22 @@
         <button id="submit">上传</button>
    </div>
    <div id="container">
+     <div id="contleft">
+      <div id="block1">
+       <h2 style="padding-top: 18px;">描述性统计信息</h2>
+       <form id="desc-form">
+         <input type="radio" name="describe" value="mean" id="avg"><label for="avg">平均值</label><br/>
+         <input type="radio" name="describe" value="std" id="std"><label for="std">标准差</label><br/>
+         <input type="radio" name="describe" value="max" id="max"><label for="max">最大值</label><br/>
+         <input type="radio" name="describe" value="min" id="min"><label for="min">最小值</label><br/>
+       </form>
+      </div>
+     </div>
+     <div id='contright'>
+     <div id="f1-right" ></div>
+     </div>
 
-       <div id="contleft" >
+<!--        <div id="contleft"v >
            <div id="canva1" class="canvas">
                <p>选项１</p>
            </div>
@@ -83,7 +97,7 @@
            </div>
            
            <div style="clear: both;"></div>
-       </div>
+       </div> -->
        <div style="clear: both;"></div>
    </div>
 
