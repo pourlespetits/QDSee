@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <script src="/static/js/jquery-1.11.3.js"></script>
+    <script src="/static/js/jquery.cookie.js"></script>
+    <script src="/static/js/setpwd.js"></script>
+    <style>
+       #subtn{
+         margin-left: 100px;
+       }
+    </style>
+    
+</head>
+<body>
+   <div id="contright-header">
+      <img src="/static/img/pwd.png">
+      <span>修改密码</span>
+   </div>
+   <form >
+    <!-- {% csrf_token %} -->
+      <div id="phonediv" class="formdiv">
+         <label for="oldpwd">旧&nbsp;密&nbsp;码:</label>
+         <div class="div-horizal">
+            <input type="password" name="oldpwd" id="oldpwd">
+            <span id="hint"></span>
+         </div>
+      </div>
+      <div id="phonediv" class="formdiv">
+         <label for="newpwd">新&nbsp;密&nbsp;码:</label>
+         <div class="div-horizal">
+            <input type="password" name="newpwd" id="newpwd">
+         </div>
+      </div>
+      <div id="phonediv" class="formdiv">
+         <label for="confpwd">确认密码:</label>
+         <div class="div-horizal">
+            <input type="password" name="confpwd" id="confpwd">
+            <span id="pwderr" style="color:red"></span>
+         </div>
+      </div>
+      <input id="subtn" type="button" disabled="true" value="保存">
+   </form>
+</body>
+</html>
