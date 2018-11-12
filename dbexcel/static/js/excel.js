@@ -55,6 +55,34 @@ function commitdata(){
             $.post('/dbexcel/analysis/',senddata,function(resp){
                 // json_data = JSON.parse(resp);
                 console.log(resp);
+                // 绘制echarts
+                var series = [];
+                resp.data.forEach(function(item){
+                    var items = {
+                        type:'bar',
+                        stack:'总量',
+                        data:item,
+                    };
+                    series.push(items);
+                });
+                console.log(series);
+                var chart = echarts.init(document.getElementById('f1-right'));
+                var option = {
+                    title:{text:'描述性统计信息',textStyle:{color:'yellow',fontSize:20}},
+                    legend:{show:true},
+                    tooltip:{show:true},
+                    backgroundColor:"#111a27",
+                    xAxis:[{
+                        type:'category',
+                        data:resp.columns
+                    }],
+                    yAxis:[{
+                        type:'value',
+                        data:resp.index,
+                    }],
+                    series:series
+                };
+                chart.setOption(option);
             },'json');
         };
         // 以二进制方式打开文件

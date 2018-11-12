@@ -29,4 +29,5 @@ def analysis_views(request):
     filepath = 'media/user_data/' + request.COOKIES.get('uphone') + '.csv'
     desc_info.to_csv(filepath)
     respdata = desc_info.to_dict('split')
+    # print(respdatas)
     return HttpResponse(json.dumps(respdata))
