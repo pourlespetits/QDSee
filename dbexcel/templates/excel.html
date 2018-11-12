@@ -1,0 +1,94 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数据分析</title>
+    <link rel="stylesheet" href="/static/css/common.css">
+    <link rel="stylesheet" href="/static/css/db_analizy.css">
+    <script src='/static/js/jquery-1.11.3.js'></script>
+    <script src='/static/js/db_analizy.js'></script>
+
+</head>
+<body>
+   <div id="header">
+      <h1  id="dsee">QDSee
+      </h1>
+      <div class="nav">
+         <a href="/index/">首页</a>
+         <a href="/wclouds/">文本</a>
+         <a href="/dbexcel/excel/">EXCEL</a>
+         <a href="/analizy/db_analizy/">数据库</a>
+         <div id="navright">
+           <!-- <a href="/login/" style="margin-right:14px;">登录</a>|
+           <a href="/register/" style="margin-right:35px">注册</a> -->
+         </div>
+      </div class="nav">
+   </div>
+
+    <div id="browse">
+        <a href="#" >
+            <input type="file" name="textfile" id="fbutton">
+        </a>
+        <button id="submit">上传</button>
+   </div>
+   <div id="container">
+
+       <div id="contleft" >
+           <div id="canva1" class="canvas">
+               <p>选项１</p>
+           </div>
+           <div id="canva2" class="canvas">
+               <p>选项2</p>
+           </div>
+           <div id="canva3" class="canvas">
+               <p>选项3</p>
+           </div>
+           <div id="canva4" class="canvas">
+               <p>选项4</p>
+           </div>
+       </div>
+
+       <div id="contright">
+           <div id="rightup" class="rightchunk">
+               <div id="canva5" class="rcanvas">
+                <p>条形图</p>
+               </div>
+               <div id="canva5" class="rcanvas">
+                   <p>折线图</p>
+               </div>
+               <div id="canva5" class="rcanvas">
+                   <p>扇形图</p>
+               </div>
+               <div id="canva5" class="rcanvas">
+                   <p>横向柱状图</p>
+               </div>
+               <div style="clear: both;"></div>
+           </div>
+           
+           <div id="rightdown" class="rightchunk">
+               <div id="canva5" class="rcanvas">
+                   <p>折线柱状图</p>
+               </div>
+               <div id="canva10" class="rcanvas">
+                   <p>散点图</p>
+               </div>
+               <div id="canva5" class="rcanvas">
+                   <p>气泡图</p>
+               </div>
+               <div id="canva5" class="rcanvas">
+                   <p>堆叠图</p>
+               </div>
+               <div style="clear: both;"></div>
+           </div>
+           
+           <div style="clear: both;"></div>
+       </div>
+       <div style="clear: both;"></div>
+   </div>
+
+   <footer>
+   @ copyright
+   </footer>
+</body>
+</html>
