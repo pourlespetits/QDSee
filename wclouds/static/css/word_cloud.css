@@ -1,0 +1,120 @@
+#container{
+    width: 100%;
+    margin:10px 0px;
+    background: #BBBCBE;
+    /*margin:0 auto;*/
+}
+#browse{
+    margin-top: 20px;
+    background-color:#212726; 
+    padding-top: 10px;
+    border-bottom: 1px solid #585A5A;
+    padding-bottom: 10px;
+}
+#fbutton{
+    background-color: #042029;
+    color: #258BD2;
+    /*border:1px solid #ccc;*/
+    border-radius: 6px;
+    margin-left: 10px;
+    display: inherit;
+}
+#submit{
+    background-color: #0640A6;
+    border:1px solid #0640A6;
+    border-radius: 5px;
+    color: white;
+    padding: 4px 10px;
+}
+#content{
+    /*text-align: center;*/
+    background-color: #042029;
+    align-content: center;
+    /*margin: 0 auto;*/
+}
+#text, #wcloud{
+    float: left;
+    margin: 15px;
+}
+#longtext{
+    background-color: #0B627D;
+    color: white;
+    font-size: 17px;
+    border-top: 1px solid #808080;
+    border-right: 1px solid #D4D0C8;
+    border-bottom: 1px solid #D4D0C8;
+    border-left: 1px solid #808080;
+}
+
+#optheader{
+    color: white;
+    padding: 10px;
+    text-align: left;
+}
+.option{
+    margin:0px 87px;
+    font-size: 17px;
+    color: #258BD2;
+}
+#cpict{
+    margin-left: 173px;
+}
+#startaly{
+    margin-left: 167px;
+    background-color: #042029;
+    border: 1px solid #212726;
+    border-radius: 5px;
+    padding: 3px 15px;
+}
+#startaly:hover{
+    background-color: #084CB1;
+    color: white;
+}
+#more{
+    position: relative;
+    float: right;
+    left: -146px;
+    background-color: #042029;
+    border: 1px solid #212726;
+    border-radius: 5px;
+    color: #258BD2;
+}
+.mybtn{
+    background-color: #042029;
+}
+#dropdownMenu1:hover{
+    background-color: #084CB1;
+    color: white;
+}
+/*词频分析部分*/
+#wordfreq{
+    width: 946px;
+    margin-left: 100px;
+    padding: 20px 0;
+    border-top: 1px solid #585A5A;
+}
+#wordfreq h4{
+    float: reft;
+    margin: 0px;
+    display: inline-block;
+}
+#wordfreq button{
+    float: right;
+    margin-left: 167px;
+    background-color: #042029;
+    border: 1px solid #212726;
+    border-radius: 5px;
+    color: #258BD2;
+    width: 100px;
+    height: 30px;
+}
+#wordfreq button:hover{
+    background-color: #084CB1;
+    color: white;
+}
+#analypic{
+    clear: both;
+    margin-top: 20px;
+    width:946px;
+    height: 506px;
+}
