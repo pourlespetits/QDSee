@@ -40,21 +40,22 @@ function commitdata(){
             for (var sheet in workbook.Sheets) {
                 if (workbook.Sheets.hasOwnProperty(sheet)) {
                     fromTo = workbook.Sheets[sheet]['!ref'];
-                    console.log(fromTo);
+                    // console.log(fromTo);
                     persons = persons.concat(XLSX.utils.sheet_to_json(workbook.Sheets[sheet]));
                     // break; // 如果只取第一张表，就取消注释这行
                 }
             }
 
             console.log(persons);
-            senddata = {
+            var senddata = {
                 'csrfmiddlewaretoken': $.cookie('csrftoken'),
-                data:persons,
-            }
-            $.post('/dbexcel/excel/analysis',senddata,function(resp){
-                json_data = JSON.parse(resp);
-                console.log(resp, json_data);
-            });
+                'data':JSON.stringify(persons),
+            };
+            console.log(senddata);
+            $.post('/dbexcel/analysis/',senddata,function(resp){
+                // json_data = JSON.parse(resp);
+                console.log(resp);
+            },'json');
         };
         // 以二进制方式打开文件
         fileReader.readAsBinaryString(files[0]);

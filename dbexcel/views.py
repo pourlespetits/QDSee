@@ -11,8 +11,7 @@ def excel_views(request):
 
 
 def analysis_views(request):
-    print(request.data)
-    data = json.loads(request.data)
+    data = json.loads(request.POST.get('data'))
     dic = {}
 
     for dicobj in data:
@@ -28,4 +27,6 @@ def analysis_views(request):
     desc_info = original.describe()
 
     filepath = 'media/user_data/' + request.COOKIES.get('uphone') + '.csv'
-    desc_info.to_csv()
+    desc_info.to_csv(filepath)
+    respdata = desc_info.to_dict('split')
+    return HttpResponse(json.dumps(respdata))
