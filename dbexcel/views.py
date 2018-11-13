@@ -52,9 +52,18 @@ def analysis_views(request):
 def option_views(request):
     select = request.GET.get('select')
     fname = 'media/user_data/' + request.COOKIES['uphone'] + '_descinfo.csv'
-    info_data = pd.read_csv(fname)
-    print(info_data)
-    print(select)
+    info_data = pd.read_csv(fname, index_col=0)
+    
     result = info_data.loc[select, :]
-    result = result.to_dict()
+    try:
+        result = result.to_dict('split')
+    except:
+        result = result.to_dict()
+    # print(result)
+    keys, values = [], []
+    for key, val in result.items():
+        keys.append(key)
+        values.append(val)
+    result = {'index': keys,
+     'values': values}
     return HttpResponse(json.dumps(result))
