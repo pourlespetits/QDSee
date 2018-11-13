@@ -129,6 +129,10 @@ function getfileor_text(shape=3,analy_word=0){
                                 color:'yellow',
                                 width:1
                             }
+                        },
+                        axisLabel:{
+                            interval:0,
+                            rotate:40,
                         }
                     }],
                     yAxis:[{

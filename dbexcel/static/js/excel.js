@@ -169,7 +169,7 @@ function descfun(){
                         // console.log(param);
                         var res = '<h3>'+param[0].name+'</h3>';
                         param.forEach(function(obj, index){
-                            res +=obj.seriesName+':'+obj.value.toFixed(2)+'<br/>';
+                            res +=obj.axisValue+':'+obj.value.toFixed(2)+'<br/>';
                         });
                         return res;
                     },  
@@ -200,7 +200,18 @@ function descfun(){
                 }],
                 series:[{
                     type:'bar',
-                    data:resp.values
+                    data:resp.values,
+                    itemStyle:{
+                        normal:{
+                            label:{show:true,
+                                position:'top',
+                                formatter:function(obj){
+                                    // console.log(obj);
+                                    return obj.value.toFixed(2);
+                                }
+                            }
+                        }
+                    }
                 }]
             };  
             chart1.setOption(option1, true);

@@ -12,9 +12,8 @@ def excel_views(request):
 
 def analysis_views(request):
     data = json.loads(request.POST.get('data'))
-    numdic = {}
-    chardic = {}
-    print(pd.DataFrame(data))
+    numdic, chardic = {}, {}
+    # print(pd.DataFrame(data))
     for dicobj in data:
         for key, value in dicobj.items():
             if '号' in key:
@@ -43,7 +42,7 @@ def analysis_views(request):
 
     filepath = 'media/user_data/' + request.COOKIES.get('uphone') + '_descinfo.csv'
     desc_info = numdata.describe()
-    print(desc_info)
+    # print(desc_info)
     desc_info.to_csv(filepath)
     respdata = desc_info.to_dict('split')
     # print(respdatas)
