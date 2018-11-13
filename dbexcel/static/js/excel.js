@@ -17,9 +17,6 @@ function setdsee(){
 //上传数据
 function commitdata(){
     $('#submit').click(function(){
-        console.log('hello');
-        // var files = e.target.files;
-
         var files = $('#fbutton').prop('files');
         var fileReader = new FileReader();
         fileReader.onload = function(ev) {
@@ -46,39 +43,91 @@ function commitdata(){
                 }
             }
 
-            console.log(persons);
+            // console.log(persons);
             var senddata = {
                 'csrfmiddlewaretoken': $.cookie('csrftoken'),
                 'data':JSON.stringify(persons),
             };
-            console.log(senddata);
+            // console.log(senddata);
             $.post('/dbexcel/analysis/',senddata,function(resp){
-                // json_data = JSON.parse(resp);
-                console.log(resp);
+                
                 // 绘制echarts
                 var series = [];
-                resp.data.forEach(function(item){
+                resp.data.forEach(function(item, subscript){
                     var items = {
+                        name:resp.index[subscript],
                         type:'bar',
                         stack:'总量',
+                        itemStyle : { normal: {label : {
+                                show: true, 
+                                position: 'insideRight',
+                                formatter:function(params){
+                                    // console.log(params);
+                                    // var i = 0;
+                                    // for(i;i<params.legth;i++){
+                                    //     params[i].data.toFixed(2);
+                                    // }
+                                    console.log(params);
+                                    return params.data.toFixed(1);
+                                }
+                            }}},
                         data:item,
                     };
                     series.push(items);
                 });
-                console.log(series);
+                // console.log(series);
                 var chart = echarts.init(document.getElementById('f1-right'));
                 var option = {
                     title:{text:'描述性统计信息',textStyle:{color:'yellow',fontSize:20}},
-                    legend:{show:true},
-                    tooltip:{show:true},
+                    legend:{
+                        show:true,
+
+                    },
+                    tooltip:{
+                        show:true,
+                        trigger:'axis',
+                        axisPointer:{
+                            type:'shadow'
+                        },
+                        formatter: function(param){
+                            // console.log(param);
+                            var res = '<h3>'+param[0].name+'</h3>';
+                            param.forEach(function(obj, index){
+                                res +=obj.seriesName+':'+obj.value.toFixed(2)+'<br/>';
+                            });
+                            return res;
+                        },  
+                    },
+                    toolbox: {
+                        show : true,
+                        feature : {
+                            mark : {show: true},
+                            dataView : {show: true, readOnly: false},
+                            magicType : {show: true, type: ['line', 'bar', 'stack', 'tiled']},
+                            restore : {show: true},
+                            saveAsImage : {show: true}
+                        }
+                    },
                     backgroundColor:"#111a27",
                     xAxis:[{
-                        type:'category',
-                        data:resp.columns
-                    }],
-                    yAxis:[{
                         type:'value',
                         data:resp.index,
+                        axisLine: {
+                            lineStyle:{
+                                color:'yellow',
+                                width:1
+                            }
+                        }
+                    }],
+                    yAxis:[{
+                        type:'category',
+                        data:resp.columns,
+                        axisLine: {
+                            lineStyle:{
+                                color:'yellow',
+                                width:1
+                            }
+                        }
                     }],
                     series:series
                 };
@@ -95,10 +144,10 @@ function commitdata(){
 function descfun(){
     $('#desc-form>input').change(function(){
         var select = $('input:radio:checked').val();
-        var url = '/dbexcel/excel/?select='+select;
+        var url = '/dbexcel/option/?select='+select;
         $.get(url, function(resp){
-            var data = JSON.parse(resp);
-            console.log(data);
+            // var data = JSON.parse(resp);
+            console.log(resp);
         });
     });
 
