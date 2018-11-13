@@ -1,6 +1,7 @@
 $(function(){
     setdsee();
     commitdata();
+    loadpage();
     descfun();
 });
 
@@ -19,6 +20,7 @@ function commitdata(){
     $('#submit').click(function(){
         var files = $('#fbutton').prop('files');
         var fileReader = new FileReader();
+        var persons = [];
         fileReader.onload = function(ev) {
             try {
                 var data = ev.target.result,
@@ -131,11 +133,29 @@ function commitdata(){
                 };
                 chart.setOption(option);
             },'json');
+
+            url = '/dbexcel/load/';
+            $.get(url,function(resp){
+                console.log(resp);
+                resp.columns.forEach(function(key,index){
+                    var block = "<div id='block"+index+"'"+" class='block'>";
+                      block += "<h2 style='padding-top:18px;'>" + key + "</h2>";
+                      block += "<input type='text' name='"+key+"'>";
+                    block +="</div>";
+                    $('#contleft').append(block);
+                });
+            },'json');
         };
         // 以二进制方式打开文件
         fileReader.readAsBinaryString(files[0]);
-        
+        // console.log(persons);
+
     });
+}
+
+// 动态加载页面和数据
+function loadpage(){
+    
 }
 
 // 描述信息的js,单选框的监控
@@ -217,6 +237,5 @@ function descfun(){
             chart1.setOption(option1, true);
         },'json');
     });
-
 
 }

@@ -48,11 +48,12 @@ def analysis_views(request):
     # print(respdatas)
     return HttpResponse(json.dumps(respdata))
 
+
 def option_views(request):
     select = request.GET.get('select')
     fname = 'media/user_data/' + request.COOKIES['uphone'] + '_descinfo.csv'
     info_data = pd.read_csv(fname, index_col=0)
-    
+
     result = info_data.loc[select, :]
     try:
         result = result.to_dict('split')
@@ -66,3 +67,21 @@ def option_views(request):
     result = {'index': keys,
      'values': values}
     return HttpResponse(json.dumps(result))
+
+
+def load_views(request):
+    # 返回数据格式{'col1':[,,,,,,],'col2':[,,,,],.....}
+    fname = 'media/user_data/' + request.COOKIES.get('uphone')\
+     + '_char.csv'
+    data = pd.read_csv(fname,index_col=0)
+    # print(data)
+    columns = data.columns
+    result = {}
+    for column in columns:
+        # 去重
+        result[column] = list(set(data[column].tolist()))
+    result['columns'] = list(columns)
+    # print(result)
+    return HttpResponse(json.dumps(result))
+
+

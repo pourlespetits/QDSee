@@ -13,12 +13,18 @@
     margin-top: 15px;
     border:1px solid transparent;
 }
-#block1{
+#desc{
     width: 250px;
     height:250px;
     background: #111a27;
     color: yellow;
-
+}
+.block{
+    width: 250px;
+    height:250px;
+    background: #111a27;
+    color: yellow;
+    margin-top:20px;
 }
 #desc-form > label{font-size: 24px;}
 

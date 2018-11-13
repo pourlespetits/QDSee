@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>数据分析</title>
     <link rel="stylesheet" href="/static/css/common.css">
-    <link rel="stylesheet" href="/static/css/db_analizy.css">
+    <link rel="stylesheet" href="/static/css/excel.css">
     <script src='/static/js/jquery-1.11.3.js'></script>
     <script src='/static/js/excel.js'></script>
     <script src='/static/js/xlsx.core.min.js'></script>
@@ -36,7 +36,7 @@
    </div>
    <div id="container">
      <div id="contleft">
-      <div id="block1">
+      <div id="desc">
        <h2 style="padding-top: 18px;">描述性统计信息</h2>
        <form id="desc-form">
          <input type="radio" name="describe" value="mean" id="avg"><label for="avg">平均值</label><br/>
@@ -45,7 +45,9 @@
          <input type="radio" name="describe" value="min" id="min"><label for="min">最小值</label><br/>
        </form>
       </div>
+      
      </div>
+     
      <div id='contright'>
      <div id="f1-right" ></div>
      </div>
