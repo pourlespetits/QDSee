@@ -1,3 +1,19 @@
+::-webkit-scrollbar-track {
+      background-color: #b46868;
+} /* 滚动条的滑轨背景颜色 */
+
+::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.2); 
+} /* 滑块颜色 */
+
+::-webkit-scrollbar-button {
+      background-color: #7c2929;
+} /* 滑轨两头的监听按钮颜色 */
+
+::-webkit-scrollbar-corner {
+      background-color: black;
+} /* 横向滚动条和纵向滚动条相交处尖角的颜色 */
+
 #container{
     background-color: #212726;
     width: 100%;
@@ -17,19 +33,41 @@
     width: 250px;
     height:250px;
     background: #111a27;
-    color: yellow;
+    color: white;
 }
 .block{
     width: 250px;
     height:250px;
     background: #111a27;
-    color: yellow;
+    color: white;
     margin-top:20px;
 }
-#desc-form > label{font-size: 24px;}
-
-#contleft{
+.myform{
+    font-size: 20px;
     text-align: center;
+}
+.circle{
+    width: 250px;
+    height: 250px;
+    background: #111a27;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+.pie{
+    width: 250px;
+    height: 250px;
+    background: #111a27;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+.linebar{
+    width: 730px;
+    height: 250px;
+    background: #111A27;
+    margin-top: 20px;
+    margin-right: 20px;
+}
+#contleft{
     border: 1px solid transparent;
     padding: 20px;
     float: left;
@@ -40,11 +78,26 @@
     padding: 20px;
     padding-left: 5px;
 }
-#f1-right{
-    width: 1000px;
-    height: 350px;
-    background: #111a27;
+#f0-right{
+    width: 630px;
+    height: 420px;
+    background: #111A27;
+    margin-right: 20px;
+    float: left;
 }
+#f1-right{
+    width: 860px;
+    height: 420px;
+    background: #111a27;
+    float: left;
+}
+#circle{
+    float:left;
+}
+#linebar{
+    float: left;
+}
+#pie{float: left;}
 #browse{
     margin-top: 20px;
     background-color:#212726; 

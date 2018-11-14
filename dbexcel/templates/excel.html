@@ -37,19 +37,58 @@
    <div id="container">
      <div id="contleft">
       <div id="desc">
-       <h2 style="padding-top: 18px;">描述性统计信息</h2>
-       <form id="desc-form">
-         <input type="radio" name="describe" value="mean" id="avg"><label for="avg">平均值</label><br/>
+       <h2 style="padding-top: 18px;margin-left: 30px;">描述性统计信息</h2>
+       <form id="desc-form" class="myform">
+         <input type="radio" name="describe" value="mean" id="avg" checked="checked"><label for="avg">平均值</label><br/>
          <input type="radio" name="describe" value="std" id="std"><label for="std">标准差</label><br/>
          <input type="radio" name="describe" value="max" id="max"><label for="max">最大值</label><br/>
          <input type="radio" name="describe" value="min" id="min"><label for="min">最小值</label><br/>
        </form>
       </div>
+      <div id="block1" class="block" style="height: 150px;">
+        <h2 style="padding-top: 18px;margin-left: 63px;">性别</h2>
+        <form id="b1-form" class="myform">
+          <input type="radio" name="sexes"
+          value="男" id="m" checked="checked"><label for='m'>男</label><br>
+          <input type="radio" name="sexes" value="w" id="女"><label for="w">女</label><br>
+        </form>
+      </div>
+      <div id="block2" class="block" style="height: 184px;">
+        <h2 style="padding-top: 18px;margin-left: 30px;">
+          班级</h2>
+        <form id="b2-form" class="myform">
+          <input type="radio" name="classes" value="class1" id="class1"><label for="class1">物联网１班</label><br>
+          <input type="radio" name="classes"
+          value="class2" id="class2"><label for="class2">物联网２班</label><br>
+          <input type="radio" name="classes"
+          value="class3" id="class3"><label for="class3">物联网３班</label><br>
+        </form>
+      </div>
+      <div id="block3" class="block" style="height: 350px;">
+        <h2 style="padding-top: 20px;margin-left: 30px;">名字</h2>
+        <form id="b3-form" class="myform">
+          <div style="height: 290px;overflow-y: auto;overflow-x: hidden;">
+            <input type="radio" name="name" >test <br>
+            test <br>
+            test <br>
+            test <br>
+
+          </div>
+        </form>
+      </div>
       
      </div>
      
      <div id='contright'>
-     <div id="f1-right" ></div>
+      <div id="f0-right"></div>
+      <div id="f1-right" ></div>
+      <div style="clear: both;"></div>
+      <div id="f2-right">
+        <div id='circle' class="circle"></div>
+        <!-- <div style="clear: both;"></div> -->
+        <div id="pie" class="pie"></div>
+        <div id="linebar" class="linebar"></div>
+      </div>
      </div>
 
 <!--        <div id="contleft"v >

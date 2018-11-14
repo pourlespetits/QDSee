@@ -1,0 +1,30 @@
+body{
+    background: #212726;
+}
+
+.block{
+    width: 250px;
+    height:250px;
+    background: #111a27;
+    color: yellow;
+    margin-top:20px;
+}
+#desc-form > label{font-size: 24px;}
+
+#contleft{
+    text-align: center;
+    border: 1px solid transparent;
+    padding: 20px;
+    float: left;
+}
+#contright{
+    float: left;
+    margin-left: 5px;
+    padding: 20px;
+    padding-left: 5px;
+}
+#f1-right{
+    width: 1000px;
+    height: 350px;
+    background: #111a27;
+}

@@ -44,15 +44,37 @@ def analysis_views(request):
     desc_info = numdata.describe()
     # print(desc_info)
     desc_info.to_csv(filepath)
-    respdata = desc_info.to_dict('split')
-    # print(respdatas)
-    return HttpResponse(json.dumps(respdata))
+    return render(request, 'excel_past.html')
+
+def get_descinfo_views(request):
+    filepath = 'media/user_data/' + request.COOKIES.get('uphone') + '_descinfo.csv'
+    data = pd.read_csv(filepath, index_col=0)
+    print(data)
+    resp = data.to_dict('split')
+    print(resp)
+    return HttpResponse(json.dumps(resp))
+
+# 获取性别数据
+def get_sexdata_views(request):
+    select = request.GET.get('sex')
+    
+    result = {}
+    return HttpResponse(json.dumps(result))
 
 
-def option_views(request):
-    select = request.GET.get('select')
-    fname = 'media/user_data/' + request.COOKIES['uphone'] + '_descinfo.csv'
+def my_descinfo_views(request):
+    fname = 'media/user_data/16620876274_descinfo.csv'
     info_data = pd.read_csv(fname, index_col=0)
+    info_data = info_data.to_dict('split')
+    return HttpResponse(json.dumps(info_data))
+
+def myoption_views(request):
+    select = request.GET.get('select')
+    fname = 'media/user_data/16620876274_descinfo.csv'
+    info_data = pd.read_csv(fname, index_col=0)
+    if select == 'all':
+        result = info_data.to_dict('split')
+        return HttpResponse(json.dumps(result))
 
     result = info_data.loc[select, :]
     try:
