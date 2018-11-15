@@ -44,25 +44,32 @@
 }
 .myform{
     font-size: 20px;
-    text-align: center;
+    margin-left: 55px;
+}
+#block4{
+    width: 250px;
+    background: #111a27;
+    color: white;
+    margin-top:20px;
+    padding-bottom: 15px;
 }
 .circle{
-    width: 250px;
-    height: 250px;
+    width: 370px;
+    height: 350px;
     background: #111a27;
     margin-top: 20px;
     margin-right: 20px;
 }
 .pie{
-    width: 250px;
-    height: 250px;
+    width: 350px;
+    height: 350px;
     background: #111a27;
     margin-top: 20px;
     margin-right: 20px;
 }
 .linebar{
-    width: 730px;
-    height: 250px;
+    width: 740px;
+    height: 350px;
     background: #111A27;
     margin-top: 20px;
     margin-right: 20px;
@@ -79,15 +86,22 @@
     padding-left: 5px;
 }
 #f0-right{
-    width: 630px;
-    height: 420px;
+    width: 740px;
+    height: 430px;
     background: #111A27;
     margin-right: 20px;
     float: left;
 }
+
+/*.count{
+    width: 305px;
+    height: 150px;
+    background: #111A27;
+    float: left;
+}*/
 #f1-right{
-    width: 860px;
-    height: 420px;
+    width: 740px;
+    height: 430px;
     background: #111a27;
     float: left;
 }
@@ -120,22 +134,28 @@
     padding: 4px 10px;
 }
 
-.rcanvas{
-    width: 300px;
-    height: 200px;
-    color: white;
-    background-color: #111A27;
-    margin:7px;
-    margin-top: 15px;
-    border: 1px solid transparent;
+.f3inner{
+    height: 430px;
+    background: #111A27;
     float: left;
+    margin-top: 20px;
 }
-.rcanvas p{
-    margin: 10px auto;
+#f3inner-left,#f4inner-left{
+    width: 860px;
 }
+#f3inner-right,#f4inner-right{
+    width: 620px;
+    margin-left: 20px;
+}
+/*.f4inner{
+    height: 430px;
+    background: #111A27;
+    margin-top: 20px;
+}
+#f4inner-left{width: 860px;}
+#f4inner-right{
+    width: 620px;*/
 
-.rightchunk{
-    width: 975px
 }
 footer{
     clear: both;

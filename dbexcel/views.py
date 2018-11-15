@@ -16,7 +16,12 @@ def analysis_views(request):
     # print(pd.DataFrame(data))
     for dicobj in data:
         for key, value in dicobj.items():
-            if '号' in key:
+            if '号' in key: # 处理不可序列化的列
+                try:
+                    chardic[key].append(value)
+                except:
+                    chardic[key] = []
+                    chardic[key].append(value)
                 continue
             if type(value) == str:
                 try:
@@ -40,11 +45,22 @@ def analysis_views(request):
     chardata = pd.DataFrame(chardic)
     chardata.to_csv(filepath)
 
+    filepath = 'media/user_data/' + request.COOKIES.get('uphone') + '_origin.csv'
+    origindata = pd.concat([chardata,numdata], axis=1)
+    origindata.to_csv(filepath)
+
     filepath = 'media/user_data/' + request.COOKIES.get('uphone') + '_descinfo.csv'
     desc_info = numdata.describe()
     # print(desc_info)
     desc_info.to_csv(filepath)
     return render(request, 'excel_past.html')
+
+# 获取表头字段
+def get_formheader_views(request):
+    fname = 'media/user_data/16620876274_num.csv' 
+    data = pd.read_csv(fname, index_col=0)
+    result = data.columns
+    return HttpResponse(json.dumps(list(result)))
 
 def get_descinfo_views(request):
     filepath = 'media/user_data/' + request.COOKIES.get('uphone') + '_descinfo.csv'
@@ -57,14 +73,83 @@ def get_descinfo_views(request):
 # 获取性别数据
 def get_sexdata_views(request):
     select = request.GET.get('sex')
-    
-    result = {}
+    # 读取源数据
+    fname = 'media/user_data/16620876274_origin.csv'
+    data = pd.read_csv(fname, index_col=0)
+    numname = 'media/user_data/16620876274_num.csv'
+    numdata = pd.read_csv(numname, index_col=0)
+
+    condition = list(numdata.columns)
+    print(condition)
+    row_condition = [(select,'count'),(select,'mean'),(select,'std'),(select,'max'),(select,'min')]
+    # 条件筛选
+    data = data.groupby(by='性别')
+    result = data.describe().loc[row_condition, condition]
+    result = result.to_dict('split')
+    print(result)
+    try:
+        return HttpResponse(json.dumps(result))
+    except TypeError as e:
+        print(e)
+        return HttpResponse(json.dumps(e))
+
+# 获取班级数据
+def get_classdata_views(request):
+    select = request.GET.get('classes')
+    fname = 'media/user_data/16620876274_origin.csv'
+    data = pd.read_csv(fname, index_col=0)
+    # 筛选条件
+    numname = 'media/user_data/16620876274_num.csv'
+    numdata = pd.read_csv(numname, index_col=0)
+    condition = list(numdata.columns)
+    print(condition)
+
+    row_condition = [(select,'mean'),(select,'max')]
+
+    data = data.groupby(by='班级').describe()
+    result = data.loc[row_condition,condition]
+    result = result.to_dict('split')
+    print(result)
     return HttpResponse(json.dumps(result))
 
+# 获取姓名数据
+def get_name_views(request):
+    fname = 'media/user_data/16620876274_char.csv'
+    data = pd.read_csv(fname, index_col=0)
+    data = data['姓名']
+    return HttpResponse(json.dumps(list(data)))
+
+def name_change_views(request):
+    name = request.GET.get('name')
+    fname = 'media/user_data/16620876274_origin.csv'
+    data = pd.read_csv(fname, index_col=0)
+
+    fname = 'media/user_data/16620876274_num.csv'
+    col_condition = pd.read_csv(fname,index_col=0).columns
+
+    data = data[data['姓名']==name].loc[:,col_condition]
+    result = data.to_dict('split')
+    print(result)
+    result.pop('index')
+    return HttpResponse(json.dumps(result))
+# 获取饼图数据
+def get_peidata_views(request):
+    fname = 'media/user_data/16620876274_origin.csv'
+    data = pd.read_csv(fname, index_col=0)
+    data = data.groupby(by='班级').count()
+    result = data.iloc[:,0]
+    result = result.to_dict()
+    columns, values = [], []
+    for key, val in result.items():
+        columns.append(key)
+        values.append(int(val))
+    result = {'columns':columns, 'data':values}
+    return HttpResponse(json.dumps(result))
 
 def my_descinfo_views(request):
     fname = 'media/user_data/16620876274_descinfo.csv'
     info_data = pd.read_csv(fname, index_col=0)
+    info_data = info_data.loc[['count','mean','std','max','min'],:]
     info_data = info_data.to_dict('split')
     return HttpResponse(json.dumps(info_data))
 
