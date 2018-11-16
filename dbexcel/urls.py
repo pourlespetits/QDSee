@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^get/name/$', get_name_views),
     url(r'^get/piedata/$', get_peidata_views),
     url(r'^name/change/$', name_change_views),
+    url(r'^orther/change/$', orther_change_views),
 ]
 
 

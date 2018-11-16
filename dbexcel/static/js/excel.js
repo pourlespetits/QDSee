@@ -139,7 +139,7 @@ function loadclass(){
         
     },'json');
 }
-// 加载描述性统计信息
+// 加载左边控制栏
 function loadDesc(){
     var url = '/dbexcel/get/my_descinfo/'
     $.get(url,function(resp){
@@ -324,16 +324,24 @@ function loadDesc(){
     // 加载班级数据
     loadclass();
 
-    // 加载表头数据
+    // 加载其他字段数据
     var url = '/dbexcel/get/formheader/';
     $.get(url, function(resp){
         var $contleft = $('#orther-form');
         resp.forEach(function(key, index){
-            var html = "<input type='radio' name='orther' value=";
+            if(index == 0){
+                var html = "<input type='radio' name='orther'checked='checked' value=";
+
+            }else{
+                var html = "<input type='radio' name='orther' value=";
+                
+            }
             html += key+"><label>"+key+"</label><br>";
             $contleft.append(html);
         });
+        drawf4();
     },'json');
+    setTimeout('ortherform()',2000);
 
     // 加载饼图数据
     url = '/dbexcel/get/piedata/';
@@ -349,6 +357,7 @@ function loadDesc(){
         var chart = echarts.init(document.getElementById('circle'));
         var option = {
             title:{text:'班级－信息统计',
+                x:'center',
                 textStyle:{color:'yellow',fontSize:24}
             },
             legend: {
@@ -360,14 +369,8 @@ function loadDesc(){
             tooltip:{
                 show:true,
                 trigger:'tiem',
-                formatter: function(param){
-                    console.log(param);
-                    var res = '<h3>'+param[0].name+'</h3>';
-                    param.forEach(function(obj, index){
-                        res +=obj.axisValue+':'+obj.value.toFixed(0)+'<br/>';
-                    });
-                    return res;
-                }
+                formatter: "{b} <br/>{a} : {c}"
+                
             },
             toolbox:{
                 show : true,
@@ -391,7 +394,7 @@ function loadDesc(){
                 roseType:'area',
                 label:{
                     normal:{show:false},
-                    emphasis:{show:true}
+                    emphasis:{show:true,fontSize:15}
                 },
                 lableLine:{
                     normal:{show:false},
@@ -490,6 +493,165 @@ function loadDesc(){
     setTimeout('nameform()',2000);
 }
 
+function drawf4() {
+    var value = $('input:radio[name="orther"]:checked').val();
+    var url = '/dbexcel/orther/change/?orther=' + value;
+    // console.log(value);
+    $.get(url, function(resp){
+        // console.log(resp);
+        // 绘制f4inner-left区域
+        var data1 = resp.result1;
+        var y = [];
+        var x = [];
+        data1.data.forEach(function(list){
+            x.push(list[0]);
+            y.push(list[1]);
+        });
+        var chart = echarts.init(document.getElementById('f4inner-left'));
+        var option = {
+            title:{
+                text:value+'－名字',
+                x:'center',
+                textStyle:{color:'yellow',fontSize:24}},
+            // legend:{show:true},
+            color:'#61A0A8',
+            tooltip:{
+                show:true,
+                trigger:'axis',
+
+            },
+            toolbox:{
+                show:true,
+                feature:{
+                    dataView:{show:true},
+                    restore:{show:true},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    saveAsImage:{show:true},
+                }
+            },
+            dataZoom:[{
+                startValue:0,
+                endValue:10,
+            },{type:'inside',}],
+            xAxis:{
+                type:'category',
+                data:x,
+                axisLine:{
+                    lineStyle:{color:'yellow',width:1}
+                },
+                axisLabel:{fontSize:15,interval:0,rotate:40}
+            },
+            yAxis:{
+                type:'value',
+                axisLine:{
+                    lineStyle:{color:'yellow',width:1}
+                },
+                axisLabel:{fontSize:15,}
+            },
+            series:[{
+                type:'bar',
+                name:value,
+                data:y,
+                markPoint:{data:[
+                    {type:'max', name:'最大值'},
+                    {type:'min',name:'最小值'}
+                ]},
+            }]
+        };
+        chart.setOption(option, true);
+
+        // 填充f4inner-right区域
+        var data2 = resp.result2;
+        console.log(data2);
+        var series = [];
+        var mean = [];
+        var max = [];
+        data2.data.forEach(function(item,index){
+            if(index%2==0){
+                mean.push(item[0]);
+            }else{max.push(item[0]);}
+        });
+        // console.log(mean,max);
+        var chart = echarts.init(document.getElementById('f4inner-right'));
+        var option = {
+            title:{text:value+'－班级',textStyle:{color:'yellow', fontSize:24}},
+            legend:{show:true,textStyle:{color:'white'}},
+            tooltip:{
+                show: true,
+                trigger: 'axis',
+                axisPointer:{show:'shadow'},
+                formatter: function(param){
+                    // console.log(param);
+                    var res = '<h3>'+param[0].name+'</h3>';
+                    param.forEach(function(obj, index){
+                        res +=obj.seriesName+':'+obj.value.toFixed(1)+'<br/>';
+                    });
+                    return res;
+                },
+            },
+            toolbox:{
+                show:true,
+                feature : {
+                    dataView : {show: true, readOnly: false},
+                    magicType : {show: true, type: ['line', 'bar']},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            calculable:true,
+            
+            xAxis:{
+                type:'category',
+                data:data2.columns,
+                axisLabel:{
+                    fontSize:15,
+                    interval:0,
+                    rotate:40,
+                },
+                axisLine:{lineStyle:{color:'yellow',width:1}}
+            },
+            yAxis:{
+                type:'value',
+                axisLine:{lineStyle:{color:'yellow',width:1}}
+            },
+            series:[{
+                name:'平均值',
+                type:'bar',
+                data:mean,
+                itemStyle:{
+                    normal:{
+                        label:{show:true,
+                            color:'white',
+                            position:'top',
+                            formatter:function(obj){
+                                // console.log(obj);
+                                return obj.value.toFixed(2);
+                            }
+                        }
+                    }
+                }
+            },
+            {
+                name:'最大值',
+                type:'bar',
+                data:max,
+                itemStyle:{
+                    normal:{
+                        label:{show:true,
+                            color:'white',
+                            position:'top',
+                            formatter:function(obj){
+                                // console.log(obj);
+                                return obj.value.toFixed(2);
+                            }
+                        }
+                    }
+                }
+            }]
+        };
+        chart.setOption(option, true);
+    },'json');
+}
 function drawf3(){
     var value = $('input:radio[name="name"]:checked').val();
     console.log(value);
@@ -500,7 +662,7 @@ function drawf3(){
         var chart = echarts.init(document.getElementById('f3inner-left'));
         var option = {
             title:{
-                text:value,
+                text:value+'－课程',
                 x:'center',
                 textStyle:{color:'yellow',fontSize:24}},
             // legend:{show:true},
@@ -558,7 +720,7 @@ function drawf3(){
         // 漏斗图
         chart = echarts.init(document.getElementById('f3inner-right'));
         option = {
-            title:{text:'漏斗图',
+            title:{text:value+'－课程',
                 x:'center',
                 textStyle:{color:'yellow',fontSize:24}},
             // legend:{show:true},
@@ -597,7 +759,12 @@ function nameform(){
         drawf3();
     });
 }
-
+function ortherform(){
+    // 其他表单
+    $('#orther-form>input').change(function(){
+        drawf4();
+    });
+}
 
 // 描述信息的js,单选框的监控
 function descfun(){
@@ -771,4 +938,6 @@ function descfun(){
         // console.log(start);
         loadclass();
     });
+
+    
 }

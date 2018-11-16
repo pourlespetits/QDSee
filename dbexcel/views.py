@@ -132,6 +132,39 @@ def name_change_views(request):
     print(result)
     result.pop('index')
     return HttpResponse(json.dumps(result))
+
+
+def orther_change_views(request):
+    field = request.GET.get('orther')
+    fname = 'media/user_data/16620876274_origin.csv'
+    data = pd.read_csv(fname, index_col=0)
+    # 图表f4-left的数据
+    data1 = data.loc[:,['姓名',field]]
+    # print(data)
+    result1 = data1.to_dict('split')
+
+    # 图表f4-right的数据
+
+    data2 = data.groupby(by='班级').describe()
+    row_condition = []
+    for key1 in ['物联网1班','物联网2班','物联网3班']:
+        for key2 in ['mean','max']:
+            item = (key1,key2)
+            row_condition.append(item)
+
+    result2 = data2.loc[row_condition, [field]]
+    # print("result2:",result2)
+    try:
+        result1 = json.dumps(result1)
+    except TypeError as e:
+        print(e)
+        result1.pop('index')
+    result2 = result2.to_dict('split')
+    print(result1,result2,end='\n')
+    result2['columns'] = ['物联网3班','物联网2班','物联网1班']
+    result = {'result1':result1,'result2':result2}
+    return HttpResponse(json.dumps(result))
+
 # 获取饼图数据
 def get_peidata_views(request):
     fname = 'media/user_data/16620876274_origin.csv'
