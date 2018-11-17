@@ -13,9 +13,9 @@
 <body>
     <div id="contleft">
       <div id="desc">
-       <h2 style="padding-top: 18px;">描述性统计信息</h2>
+       <h2 style="padding-top: 18px;margin-left: 35px;">描述性统计信息</h2>
        <form id="desc-form">
-         <input type="radio" name="describe" value="mean" id="avg"><label for="avg">平均值</label><br/>
+         <input type="radio" name="describe" value="mean" id="avg" checked><label for="avg">平均值</label><br/>
          <input type="radio" name="describe" value="std" id="std"><label for="std">标准差</label><br/>
          <input type="radio" name="describe" value="max" id="max"><label for="max">最大值</label><br/>
          <input type="radio" name="describe" value="min" id="min"><label for="min">最小值</label><br/>
@@ -25,7 +25,10 @@
      </div>
      
      <div id='contright'>
-     <div id="f1-right" ></div>
+      <div id="f1-right" ></div>
+      <div id="f2-right"></div>
+      <div style="clear: both;"></div>
      </div>
+     <div style="clear: both;"></div>
 </body>
 </html>

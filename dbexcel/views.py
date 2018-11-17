@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse
 from .views import *
+from django.core import serializers
 import json
 import pandas as pd
 # Create your views here.
@@ -65,9 +66,9 @@ def get_formheader_views(request):
 def get_descinfo_views(request):
     filepath = 'media/user_data/' + request.COOKIES.get('uphone') + '_descinfo.csv'
     data = pd.read_csv(filepath, index_col=0)
-    print(data)
+    # print(data)
     resp = data.to_dict('split')
-    print(resp)
+    # print(resp)
     return HttpResponse(json.dumps(resp))
 
 # 获取性别数据
@@ -186,9 +187,7 @@ def my_descinfo_views(request):
     info_data = info_data.to_dict('split')
     return HttpResponse(json.dumps(info_data))
 
-def myoption_views(request):
-    select = request.GET.get('select')
-    fname = 'media/user_data/16620876274_descinfo.csv'
+def option(fname,select):
     info_data = pd.read_csv(fname, index_col=0)
     if select == 'all':
         result = info_data.to_dict('split')
@@ -206,9 +205,16 @@ def myoption_views(request):
         values.append(val)
     result = {'index': keys,
      'values': values}
-    return HttpResponse(json.dumps(result))
+    return json.dumps(result)
+
+def myoption_views(request):
+    select = request.GET.get('select')
+    fname = 'media/user_data/16620876274_descinfo.csv'
+    result = option(fname,select)
+    return HttpResponse(result)
 
 
+# 可删
 def load_views(request):
     # 返回数据格式{'col1':[,,,,,,],'col2':[,,,,],.....}
     fname = 'media/user_data/' + request.COOKIES.get('uphone')\
@@ -225,3 +231,35 @@ def load_views(request):
     return HttpResponse(json.dumps(result))
 
 
+# 加载excel_past.html页面
+def load_views(request):
+    uphone = request.COOKIES.get('uphone')
+    fname = 'media/user_data/'+uphone+'_char.csv'
+    oridata = pd.read_csv(fname, index_col=0)
+    dic = {}
+    # 遍历每个字段的数据
+    for key in oridata.columns:
+        if '号' in key:
+            continue
+        dn = set(oridata[key]) # 去重
+        if len(dn)<10:
+            dic[key] = list(dn)
+        else:
+            dic[key] = list(oridata[key])
+
+    result = sorted(dic.items(),key=lambda x:len(x[1]))
+    # print(result)
+    # 读取其他字段
+    fname = 'media/user_data/'+uphone+"_num.csv"
+    data = pd.read_csv(fname,index_col=0)
+    item = ('其他字段',list(data.columns))
+    result.append(item)
+    return HttpResponse(json.dumps(result))
+    
+
+def option_views(request):
+    select = request.GET.get('select')
+    uphone = request.COOKIES.get("uphone")
+    fname = 'media/user_data/'+uphone+'_descinfo.csv'
+    result = option(fname, select)
+    return HttpResponse(result)

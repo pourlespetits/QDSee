@@ -18,4 +18,7 @@ urlpatterns = [
     url(r'^orther/change/$', orther_change_views),
 ]
 
-
+urlpatterns +=[
+    url(r'^loadleft/$', load_views),
+    url(r'^option/$', option_views),
+]
