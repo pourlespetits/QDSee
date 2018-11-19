@@ -21,4 +21,5 @@ urlpatterns = [
 urlpatterns +=[
     url(r'^loadleft/$', load_views),
     url(r'^option/$', option_views),
+    url(r'^form/change/$', form_change_views),
 ]

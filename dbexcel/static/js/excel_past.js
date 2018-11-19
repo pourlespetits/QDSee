@@ -195,6 +195,407 @@ function drawf1() {
         chart1.setOption(option1, true);
     },'json');
 }
+// 横向柱状图
+function drawhbar(element_id,xdata,ydata,series,title='test'){
+    var chart = echarts.init(document.getElementById(element_id));
+    var option = {
+        title:{text:title,textStyle:{color:'yellow',fontSize:24}},
+        legend:{
+            show:true,
+            // top:'center',
+            // data:['平均值','标准差','最大值','最小值'],
+            textStyle:{color:'white'}
+        },
+        tooltip:{
+            show:true,
+            trigger:'axis',
+            axisPointer:{show:'shadow'},formatter: function(param){
+            // console.log(param);
+            var res = '<h3>'+param[0].name+'</h3>';
+            param.forEach(function(obj, index){
+                res +=obj.seriesName+':'+obj.value.toFixed(2)+'<br/>';
+            });
+            return res;
+        },
+        },
+        toolbox:{
+            show:true,
+            feature:{
+                dataView:{show:true},
+                restore:{show:true},
+                saveAsImage:{show:true},
+            }
+        },
+        xAxis:{
+            type:'value',
+            axisLine:{
+                lineStyle:{color:'yellow',width:1}
+            },
+        },
+        yAxis:{
+            type:'category',
+            data:ydata,
+            axisLine:{
+                lineStyle:{color:'yellow',width:1}
+            },axisLabel:{fontSize:14}
+        },
+        series:series
+    };
+    chart.setOption(option, true);
+}
+function draw_two_bar(element_id,xdata,ydata,series,title='test'){
+    var chart = echarts.init(document.getElementById(element_id));
+    var option = {
+        title:{text:title,textStyle:{color:'yellow', fontSize:24}},
+        legend:{show:true,textStyle:{color:'white'}},
+        tooltip:{
+            show: true,
+            trigger: 'axis',
+            axisPointer:{show:'shadow'},
+            formatter: function(param){
+                // console.log(param);
+                var res = '<h3>'+param[0].name+'</h3>';
+                param.forEach(function(obj, index){
+                    res +=obj.seriesName+':'+obj.value.toFixed(2)+'<br/>';
+                });
+                return res;
+            },
+        },
+        toolbox:{
+            show:true,
+            feature : {
+                dataView : {show: true, readOnly: false},
+                magicType : {show: true, type: ['line', 'bar']},
+                restore : {show: true},
+                saveAsImage : {show: true}
+            }
+        },
+        calculable:true,
+        dataZoom:[{
+            startValue: 0,
+            endValue:5,
+        }, {
+            type: 'inside'
+        }],
+        xAxis:{
+            type:'category',
+            data:xdata,
+            axisLabel:{
+                fontSize:15,
+                interval:0,
+                rotate:40,
+            },
+            axisLine:{lineStyle:{color:'yellow',width:1}}
+        },
+        yAxis:{
+            type:'value',
+            axisLine:{lineStyle:{color:'yellow',width:1}}
+        },
+        series:series
+    };
+    chart.setOption(option, true);
+}
+// 玫瑰图
+function mynathrose(element_id,data,legend,title='test'){
+    var chart = echarts.init(document.getElementById(element_id));
+    var option = {
+        title:{text:title,
+            x:'center',
+            textStyle:{
+            color:'yellow',
+            fontSize:24}},
+        backgroundColor:'#111a27',
+        legend:{show:true,
+            x : 'center',
+            y : 'bottom',
+            textStyle:{color:'white'},
+            data:legend
+        },
+        tooltip:{
+            show:true,
+            trigger:'item',
+            axisPointer:{show:'shadow'},
+            formatter: "{b} <br/>{a} : {c}"
+        },
+        toolbox:{
+            show:true,
+            feature:{
+                dataView:{show:true},
+                magicType:{show:true,type:['pie','funnel']},
+                restore:{show:true},
+                saveAsImage:{show:true},
+            }
+        },
+
+        calculable:true,
+
+        series:[{
+            name:'数值',
+            type:'pie',
+            data:data,
+            radius:[20,110],
+            center:['50%','50%'],
+            roseType:'area',
+            label: {
+                normal: {show: false},
+                emphasis: {show: true,fontSize:20}
+            },
+            lableLine: {
+                normal: {show: false},
+                emphasis: {show: true}
+            },
+            data:data
+        }]
+    };
+    chart.setOption(option, true);
+}
+// 漏斗图
+function funnel(element_id,data,title='test'){
+    chart = echarts.init(document.getElementById(element_id));
+    option = {
+        title:{text:title,
+            x:'center',
+            textStyle:{color:'yellow',fontSize:24}},
+        // legend:{show:true},
+        tooltip:{
+            show:true,
+            trigger:'item',
+            formatter:'{b} <br>{a}: {c}'
+        },
+        calculable:true,
+        toolbox:{
+            show:true,
+            feature:{
+                dataView:{show:true},
+                restore:{show:true},
+                magicType:{show:true},
+                saveAsImage:{show:true},
+            }
+        },
+        series:[{
+            name:'数值',
+            type:'funnel',
+            width:'60%',
+            data:data,
+        }]
+    };
+    chart.setOption(option, true);
+}
+// 普通柱状图
+function mybar(element_id,xlabel,data,title='test',color='#1858E5'){
+    var chart = echarts.init(document.getElementById(element_id));
+    var option = {
+        title:{text:title,textStyle:{color:'yellow',fontSize:24}},
+        backgroundColor:'#111a27',
+        color:color,
+        // legend:{show:true,textStyle:'white'},
+        tooltip:{
+            show:true,
+            trigger:'axis',
+            axisPointer:{show:'shadow'},
+            formatter:function(params){
+                var res = '<h3>'+params[0].name+'</h3>';
+                params.forEach(function(obj,index){
+                    res +=obj.seriesName+':'+obj.value.toFixed(1)+'<br/>';
+                });
+                return res;
+            },
+        },
+        toolbox:{
+            show:true,
+            feature:{
+                dataView:{show:true},
+                magicType:{show:true,type:['line','bar']},
+                restore:{show:true},
+                saveAsImage:{show:true},
+            }
+        },
+        dataZoom:[{
+                startValue:0,
+                endValue:10,
+            },{type:'inside'
+        }],
+        calculable:true,
+        xAxis:{
+            type:'category',
+            data:xlabel,
+            axisLine:{
+                lineStyle:{color:'yellow',width:1},
+            },
+            axisLabel:{
+                fontSize:15,
+                interval:0,
+                rotate:40,
+            }
+        },
+        yAxis:{
+            type:'value',
+            axisLine:{
+                lineStyle:{color:'yellow',width:1},
+            },
+        },
+        series:[{
+            name:'数值',
+            type:'bar',
+            data:data,
+            itemStyle:{
+                normal:{
+                    label:{show:true,
+                        position:'top',
+                        color:'white',
+                        formatter:function(obj){
+                            // console.log(obj);
+                            return obj.value.toFixed(2);
+                        }
+                    }
+                }
+            }
+        }]
+    };
+    chart.setOption(option, true);
+}
+
+// 初始化图表
+function init(tuple, index){
+    var value = $("input:radio[name='form"+index+"']:checked").val();
+    console.log('form'+index,value);
+    var url = '/dbexcel/form/change/?'+tuple[0]+'='+value;
+    tl = tuple[1].length;
+    if(tl==2){
+        $.get(url, function(resp){
+            console.log(resp);
+            var series = [];
+            var legends = ['人数','平均值','标准差','最大值','最小值'];
+            resp.data.forEach(function(item,index){
+                var items = {
+                    name:legends[index],
+                    type:'bar',
+                    stack:'总量',
+                    data:item,
+                    itemStyle : { 
+                        normal: {
+                            label : {
+                                show: true, 
+                                position: 'insideRight',
+                                formatter:function(params){
+                                    // console.log(params);
+                                    return params.data.toFixed(1);
+                                }
+                            },
+                        },
+                    },
+                };
+                series.push(items);
+            });
+            title = value+'-描述信息';
+            drawhbar('f1-right','',resp.columns,series,title);
+            // console.log('finish');
+        },'json');
+    }else if (tl>2&&tl<6) {
+        $.get(url, function(resp){
+            console.log(resp);
+            // 图１
+            var series = [];
+            resp.result1.data.forEach(function(item,index){
+                var items = {
+                    name:resp.result1.index[index][1],
+                    type:'bar',
+                    data:item,
+                    markPoint:{data:[
+                        {type:'max', name:'最大值'},
+                        {type:'min',name:'最小值'}
+                    ]},
+                };
+                series.push(items);
+            });
+            ele_id = 'r'+index+'-1'+tl;
+            xdata = resp.result1.columns;
+            console.log('xdata:',xdata);
+            draw_two_bar(ele_id,xdata,'',series,value);
+            
+            // 图２
+            ele_id = 'r'+index+'-2'+tl;
+            legend = resp.result2.columns;
+            data = [];
+            resp.result2.data.forEach(function(val,idx){
+                var item = {value:val,name:legend[idx]};
+                data.push(item);
+            });
+            mynathrose(ele_id,data,legend,tuple[0]);
+            
+            // 图３
+            ele_id = 'r'+index+'-3'+tl;
+            funnel(ele_id,data,tuple[0]+'漏斗');
+        },'json');
+    }else if (tuple[0]=='其他字段') {
+        $.get(url, function(resp){
+            console.log(resp);
+            ele_id = 'r'+index+'-1'+tl;
+            xlabel = [];
+            data = [];
+            resp.result1.data.forEach(function(list, index){
+                xlabel.push(list[0]);
+                data.push(list[1]);
+            });
+            title = resp.result1.columns[0]+'-'+resp.result1.columns[1];
+            mybar(ele_id,xlabel,data,title);
+
+            // var series = [];
+            xdata = [];
+            mean = [];
+            max = [];
+            resp.result2.data.forEach(function(item,index){
+                if (index%2==0) {
+                    mean.push(item[0]);
+                    xdata.push(resp.result2.index[index][0]);
+                }else{
+                    max.push(item[0]);
+                }
+            });
+
+            var series = [{
+                name:'平均值',
+                type:'bar',
+                data:mean,
+                markPoint:{data:[
+                    {type:'max', name:'最大值'},
+                    {type:'min',name:'最小值'}
+                ]},
+            },{
+                name:'最大值',
+                type:'bar',
+                data:max,
+                markPoint:{data:[
+                    {type:'max', name:'最大值'},
+                    {type:'min',name:'最小值'}
+                ]},
+            }];
+
+            ele_id = 'r'+index+'-2'+tl;
+            title = resp.result2.columns[0];
+            
+            draw_two_bar(ele_id,xdata,'',series,title);
+        },'json');
+    }else {
+        $.get(url, function(resp){
+            console.log(resp);
+            // 图1
+            ele_id = 'r'+index+'-1'+tl;
+            xlabel = resp.columns;
+            data = resp.data[0];
+            mybar(ele_id,xlabel,data,value);
+            //图２
+            ele_id = 'r'+index+'-2'+tl;
+            da = [];
+            data.forEach(function(val,idx){
+                var item = {value:val,name:xlabel[idx]};
+                da.push(item);
+            });
+            funnel(ele_id,da,value+'漏斗');
+        },'json');
+    }
+}
+
 // 单选框的监控
 function descfun(num){
     // 表单１
@@ -203,16 +604,17 @@ function descfun(num){
     });
     // console.log(num);
     num.forEach(function(tuple, index){
-        if(tuple[1].length>10){
+        tl = tuple[1].length
+        if(tl>10){
             var id = '#form-div'+index+'>input';
             var $formid = $(id);
         }else{
             var $formid = $('#form'+index+'>input');
         }
+        init(tuple, index)
         $formid.change(function(){
-
-            var value = $("input:radio[name='form"+index+"']:checked").val();
-            // console.log('form'+index,value);
+            init(tuple, index);
+            
         });
     });
 }
@@ -277,5 +679,6 @@ function load(){
         });
     },'json');
     // console.log(form_num);
+
     descfun(form_num);
 }

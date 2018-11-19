@@ -71,7 +71,7 @@ function loadclass(){
     var select3 = $('input:radio[name="classes"]:checked').val();
     var url = '/dbexcel/get/classdata/?classes='+select3;
     $.get(url, function(resp){
-        console.log('start drawing',resp);
+        // console.log('start drawing',resp);
         var series = [];
         resp.data.forEach(function(item,index){
             var items = {
@@ -739,9 +739,6 @@ function drawf3(){
                     saveAsImage:{show:true},
                 }
             },
-            // xAxis:{
-            //     type:'category',
-            // }
             series:[{
                 name:'分数',
                 type:'funnel',

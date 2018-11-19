@@ -81,13 +81,13 @@ def get_sexdata_views(request):
     numdata = pd.read_csv(numname, index_col=0)
 
     condition = list(numdata.columns)
-    print(condition)
+    # print(condition)
     row_condition = [(select,'count'),(select,'mean'),(select,'std'),(select,'max'),(select,'min')]
     # 条件筛选
     data = data.groupby(by='性别')
     result = data.describe().loc[row_condition, condition]
     result = result.to_dict('split')
-    print(result)
+    # print(result)
     try:
         return HttpResponse(json.dumps(result))
     except TypeError as e:
@@ -103,14 +103,14 @@ def get_classdata_views(request):
     numname = 'media/user_data/16620876274_num.csv'
     numdata = pd.read_csv(numname, index_col=0)
     condition = list(numdata.columns)
-    print(condition)
+    # print(condition)
 
     row_condition = [(select,'mean'),(select,'max')]
 
     data = data.groupby(by='班级').describe()
     result = data.loc[row_condition,condition]
     result = result.to_dict('split')
-    print(result)
+    # print(result)
     return HttpResponse(json.dumps(result))
 
 # 获取姓名数据
@@ -130,7 +130,7 @@ def name_change_views(request):
 
     data = data[data['姓名']==name].loc[:,col_condition]
     result = data.to_dict('split')
-    print(result)
+    # print(result)
     result.pop('index')
     return HttpResponse(json.dumps(result))
 
@@ -161,7 +161,7 @@ def orther_change_views(request):
         print(e)
         result1.pop('index')
     result2 = result2.to_dict('split')
-    print(result1,result2,end='\n')
+    # print(result1,result2,end='\n')
     result2['columns'] = ['物联网3班','物联网2班','物联网1班']
     result = {'result1':result1,'result2':result2}
     return HttpResponse(json.dumps(result))
@@ -263,3 +263,107 @@ def option_views(request):
     fname = 'media/user_data/'+uphone+'_descinfo.csv'
     result = option(fname, select)
     return HttpResponse(result)
+
+
+def form_change_views(request):
+    uphone = request.COOKIES.get('uphone')
+    char_fname = 'media/user_data/'+uphone+'_char.csv'
+    num_fname = 'media/user_data/'+uphone+'_num.csv'
+    char_data = pd.read_csv(char_fname,index_col=0)
+    charfield = char_data.columns
+
+    num_data = pd.read_csv(num_fname, index_col=0)
+    numfield = num_data.columns
+   
+    # 其他数值字段的请求
+    select = request.GET.get('其他字段')
+    # print('select->',select)
+    if select:
+        fname = 'media/user_data/'+uphone+'_origin.csv'
+        data = pd.read_csv(fname, index_col=0)
+        colcon = []
+        for nfield in charfield:
+            if '名' in nfield:
+                colcon.append(nfield)
+        colcon.append(select)
+        # print(colcon)
+        data1 = data.loc[:,colcon]
+        # print('data1',data1)
+        result1 = data1.to_dict('split')
+
+        for byvalue in charfield:
+            classgroup = set(char_data[byvalue])
+            ln = len(classgroup)
+            if ln>=3 and ln<=6:
+                data2 = data.groupby(by=byvalue).describe()
+                break   
+        try:
+            result1 = json.dumps(result1)
+        except TypeError as e:
+            print(e)
+            result1.pop('index')
+        # print('data2:',data2)
+        row_condition = []
+        for key1 in classgroup:
+            for key2 in ['mean','max']:
+                item = (key1,key2)
+                row_condition.append(item)
+
+        result2 = data2.loc[row_condition, [select]]
+        # print(result2)
+        result2 = result2.to_dict('split')
+
+        # print(result2)
+        result = {'result1':result1,'result2':result2}
+        return HttpResponse(json.dumps(result))
+
+    #判断哪个字符字段的请求
+    for field in charfield:
+        select = request.GET.get(field)
+        # print('select:',select)
+        if select:
+            field_data = char_data[field]
+            dlen = len(set(field_data))
+            condition = list(numfield)
+            if dlen==2: # 值只有２种的字段
+                fname = 'media/user_data/'+uphone+'_origin.csv'
+                data = pd.read_csv(fname, index_col=0)
+                row_condition = [(select,'count'),(select,'mean'),(select,'std'),(select,'max'),(select,'min')]
+                # 条件筛选
+                data = data.groupby(by=field)
+                result = data.describe().loc[row_condition, condition]
+                # print(result)
+                result = result.to_dict('split')
+
+                return HttpResponse(json.dumps(result))
+            elif dlen>=3 and dlen<10: #值多余２种少于8种的字段
+                fname = 'media/user_data/'+uphone+'_origin.csv'
+                data = pd.read_csv(fname, index_col=0)
+                row_condition = [(select,'mean'),(select,'max')]
+                data = data.groupby(by=field)
+                result1 = data.describe().loc[row_condition,condition]
+                result1 = result1.to_dict('split')
+                # print(result)
+
+                # 饼图数据
+                result = data.count().iloc[:,0]
+                result = result.to_dict()
+                columns, values = [], []
+                for key, val in result.items():
+                    columns.append(key)
+                    values.append(int(val))
+                result2 = {'columns':columns, 'data':values}
+                result={'result1':result1,'result2':result2}
+                return HttpResponse(json.dumps(result))
+            elif dlen>=10:
+                fname = 'media/user_data/'+uphone+'_origin.csv'
+                data = pd.read_csv(fname, index_col=0)
+
+                data = data[data[field]==select].loc[:,numfield]
+                result = data.to_dict('split')
+                # print(result)
+                result.pop('index')
+                return HttpResponse(json.dumps(result))
+
+        
+
